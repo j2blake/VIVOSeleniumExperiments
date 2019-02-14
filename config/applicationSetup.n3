@@ -22,7 +22,7 @@
 :application 
     a   vitroWebapp:application.ApplicationImpl ,
         vitroWebapp:modules.Application ;
-    :hasSearchEngine              :instrumentedSearchEngineWrapper ;
+    :hasSearchEngine              :parsingSearchEngineWrapper ;
     :hasSearchIndexer             :basicSearchIndexer ;
     :hasImageProcessor            :iioImageProcessor ;
     :hasFileStorage               :ptiFileStorage ;
@@ -58,14 +58,26 @@
 #    and more rigorous life-cycle checking.
 #
 
+:parsingSearchEngineWrapper 
+    a   vitroWebapp:searchengine.SearchQueryParsingLogger , 
+        vitroWebapp:modules.searchEngine.SearchEngine ;
+    :wraps :instrumentedSearchEngineWrapper ;
+    :hasTextFields "ALLTEXT, rawName" .
+
 :instrumentedSearchEngineWrapper 
     a   vitroWebapp:searchengine.InstrumentedSearchEngineWrapper , 
         vitroWebapp:modules.searchEngine.SearchEngine ;
-    :wraps :solrSearchEngine .
+#    :wraps :solrSearchEngine .
+    :wraps :transientSearchEngine .
 
 :solrSearchEngine
     a   vitroWebapp:searchengine.solr.SolrSearchEngine ,
         vitroWebapp:modules.searchEngine.SearchEngine .
+
+:transientSearchEngine
+    a   vitroWebapp:searchengine.transience.TransientSearchEngine ,
+        vitroWebapp:modules.searchEngine.SearchEngine ;
+    :hasTextFields "ALLTEXT, rawName" .
 
 # ----------------------------
 #

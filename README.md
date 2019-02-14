@@ -1,5 +1,11 @@
 # Selenium Experiments
 
+## TODO
+
+* Pre-loading RDF files
+* Highlights
+* >>>>>> Separate Maven project.
+
 ## What are we doing?
 
 * Eventually, trying to set up a process of running Selenium tests against VIVO, as part of the continuous integration process.
@@ -35,6 +41,15 @@
 	* Create a file of test user accounts for auth/everytime
 	* Implement most (or all) of legacy Selenium tests and suites.
 
+## What's the payoff?
+
+### Fully-automated
+### Repeatable results
+### Isolated test suites
+### Headless option
+### Minimal installation
+### Fast startup and execution
+### Modular replacement of production code
 	
 ## Test it
 
@@ -95,6 +110,10 @@ These must be commented out prior to build-time, or Jetty will fail.
 	```	
 	* Don't see why this is happening. The Solr index is rebuilt successfully. 
 	* After replacing the Solr index, we shouldn't care.
+
+* Badly formatted query string.
+	* Some queries are in this form: "classgroup:http://this.that/someUri". Solr is willing to parse this, but it's not standard Lucene syntax. This has already shown up in the Elasticsearch implementation.
+	* This should be fixed in the client code: run a luceneEscape() method on the text.
 	
 ## References
 
