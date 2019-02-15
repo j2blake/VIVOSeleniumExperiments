@@ -4,6 +4,13 @@
 
 * Pre-loading RDF files
 * Highlights
+	* The plan:
+		* When parsing values into terms, each term should be a structure of value, start index and end index (exclusive).
+		* When a query processes documents, it should get not just a list of documents, it should also receive a separate highlights structure:
+			* docId > field > value > bitset of highlighted characters in the value.
+		* On each match, the query has sufficient info to add to the highlights.
+		* This means that the query must scan all values for matches, not just accepting the first one, while not storing a document multiple times.
+		* At the end of the query, this structure will be converted into the one expected by the search engine.
 * >>>>>> Separate Maven project.
 
 ## What are we doing?
